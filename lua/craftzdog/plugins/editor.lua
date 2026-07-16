@@ -45,6 +45,10 @@ return {
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     ft = { 'markdown' },
     build = 'cd app && npm install',
+    init = function()
+      -- muestra la URL del preview por si el navegador no abre solo
+      vim.g.mkdp_echo_preview_url = 1
+    end,
     keys = {
       { ';m', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Markdown en el navegador' },
     },
