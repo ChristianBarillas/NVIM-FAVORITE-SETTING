@@ -86,6 +86,7 @@ activa solo.
 | `tree-sitter-cli` | Compilar parsers (la rama main de nvim-treesitter lo exige) |
 | `lazygit` | Git visual (`\gg` / `lg`) |
 | `gh` | GitHub CLI (lo usa Octo para PRs/issues) |
+| `tmux` | Sesiones persistentes: SSH que sobrevive desconexiones, agentes AI en paralelo |
 
 ### 3. Fuente (único cask que el script instala: es un recurso del editor)
 
@@ -99,6 +100,7 @@ activa solo.
 |---|---|
 | `~/.config/nvim` | Symlink al repo (si había algo, lo respalda como `nvim.respaldo.FECHA`) |
 | `~/.config/ghostty/config` | Tema `Solarized Osaka Night` + Nerd Font (solo si Ghostty está instalada Y no hay config previa) |
+| `~/.config/tmux/tmux.conf` | Symlink a `extras/tmux.conf` del repo (solo si no existe) |
 | `~/.zshrc` | Bloque con `EDITOR=nvim`, `VISUAL=nvim`, `alias v='nvim'`, `alias lg='lazygit'` (solo si no está) |
 | `~/.zprofile` | `eval "$(brew shellenv)"` (solo si no está) |
 

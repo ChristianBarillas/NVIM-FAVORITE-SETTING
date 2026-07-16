@@ -352,6 +352,62 @@ Python usa `debugpy` y JS/TS usa `js-debug` — Mason los instala solo.
 | `:Lazy` / `:Mason` | administrar plugins / LSPs |
 | `:checkhealth` | diagnóstico completo de Neovim |
 
+### tmux — sesiones inmortales (SSH y agentes de AI)
+
+tmux crea terminales *adentro* de tu terminal, agrupadas en **sesiones
+que siguen vivas aunque cierres la ventana o se caiga el SSH**. El
+prefijo es `Ctrl-b`: presiónalo, suéltalo, y luego la tecla del comando.
+
+**Sesiones (lo importante):**
+
+| Comando | Acción |
+|---|---|
+| `tmux new -s trabajo` | crear la sesión "trabajo" |
+| `Ctrl-b d` | *detach*: salir dejando TODO corriendo |
+| `tmux ls` | ver las sesiones vivas |
+| `tmux attach -t trabajo` | volver a entrar donde quedaste |
+| `tmux kill-session -t trabajo` | matarla de verdad |
+
+**Adentro de una sesión:**
+
+| Atajo | Acción |
+|---|---|
+| `Ctrl-b c` | nueva ventana (pestaña) |
+| `Ctrl-b n` / `Ctrl-b p` / `Ctrl-b 1..9` | siguiente / anterior / ir a la N |
+| `Ctrl-b \|` / `Ctrl-b -` | dividir en panel vertical / horizontal |
+| `Ctrl-b h j k l` | moverse entre paneles (como en Neovim) |
+| `Ctrl-b x` | cerrar el panel |
+| `Ctrl-b [` | modo scroll/copiar (sal con `q`; copia estilo vim: `v` y `y`) |
+| `Ctrl-b r` | recargar la configuración |
+
+**El flujo con servidores SSH** (para esto lo instalaste):
+
+```bash
+ssh mi-servidor
+tmux attach || tmux new -s servidor   # entra a la sesión o créala
+# ... trabajas, lanzas procesos largos ...
+# se corta el internet o cierras la laptop → NO PASA NADA
+ssh mi-servidor
+tmux attach        # todo sigue exactamente donde estaba
+```
+
+**Agentes de AI (Claude Code) en sesiones separadas** — la joya:
+
+```bash
+tmux new -s agente-api      # sesión 1: claude trabajando en el backend
+tmux new -s agente-web      # sesión 2: claude trabajando en el frontend
+tmux ls                     # ver cuáles siguen trabajando
+tmux attach -t agente-api   # asomarte a una, Ctrl-b d para dejarla
+```
+
+- Cada agente conserva su proceso vivo aunque te desconectes: una tarea
+  larga (refactor, migración, tests) **no muere** si cierras la laptop
+  o se corta el SSH al servidor.
+- Puedes tener **varios agentes en paralelo**, cada uno en su proyecto,
+  y saltar entre ellos para supervisarlos.
+- Truco de supervisión: `Ctrl-b |` y en un panel corre el agente, en el
+  otro `lazygit` o los logs — ves en vivo lo que va cambiando.
+
 ### Mentalidad senior
 
 1. **Si lo hiciste dos veces igual, automatízalo**: `.`, una macro, o `:g`.

@@ -5,6 +5,22 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.5.0] - 2026-07-16
+
+### Añadido
+- **tmux** (brew) con configuración versionada en `extras/tmux.conf`,
+  enlazada como `~/.config/tmux/tmux.conf` (install.sh lo hace en
+  máquinas nuevas). Pensado para: sesiones SSH que sobreviven
+  desconexiones y **agentes de AI (Claude Code) corriendo en paralelo
+  en sesiones separadas**. Config: true color (Neovim idéntico adentro),
+  `escape-time 10` (Esc instantáneo en Neovim), mouse, modo vi para
+  copiar, splits `|`/`-`, paneles con `prefijo+hjkl`, barra solarized,
+  prefijo default `Ctrl-b`.
+- COMANDOS.md: sección completa de tmux (sesiones, atajos, flujo SSH y
+  flujo de agentes AI).
+- Nota: se evitó a propósito el plugin vim-tmux-navigator para no pisar
+  `Ctrl-j` (diagnóstico siguiente en Neovim).
+
 ## [2.4.2] - 2026-07-16
 
 ### Añadido

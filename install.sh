@@ -100,7 +100,7 @@ command -v flutter >/dev/null 2>&1 \
 
 # ── 2. Herramientas de terminal (formulas) ────────────────────────────
 info "2/7 · Herramientas del editor (brew install)"
-FORMULAS=(neovim git node python ripgrep fd fzf tree-sitter-cli lazygit gh)
+FORMULAS=(neovim git node python ripgrep fd fzf tree-sitter-cli lazygit gh tmux)
 for f in "${FORMULAS[@]}"; do
   if brew list --formula "$f" >/dev/null 2>&1; then
     ok "$f (ya estaba)"
@@ -156,6 +156,16 @@ EOF
   ok "Ghostty configurada (tema y fuente a juego con el editor)"
 else
   ok "Ghostty ya tenía configuración (no se toca)"
+fi
+
+# tmux: enlazar la config del repo (sesiones persistentes, SSH, agentes AI)
+TMUX_CFG="$HOME/.config/tmux/tmux.conf"
+if [ ! -e "$TMUX_CFG" ]; then
+  mkdir -p "$(dirname "$TMUX_CFG")"
+  ln -s "$SCRIPT_DIR/extras/tmux.conf" "$TMUX_CFG"
+  ok "tmux configurado (~/.config/tmux/tmux.conf → repo)"
+else
+  ok "tmux ya tenía configuración (no se toca)"
 fi
 
 if ! grep -q "EDITOR=nvim" "$HOME/.zshrc" 2>/dev/null; then
