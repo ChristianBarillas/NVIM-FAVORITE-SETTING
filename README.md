@@ -107,18 +107,20 @@ brew install --cask font-jetbrains-mono-nerd-font ghostty
 
 ## Instalación
 
-**Máquina nueva — UN comando y ~15 min** (📖 guía completa e inventario
-total en **[INSTALL.md](INSTALL.md)**):
+**Máquina nueva — UN comando** (📖 guía completa e inventario total en
+**[INSTALL.md](INSTALL.md)**):
 
 ```bash
 git clone https://github.com/ChristianBarillas/NVIM-FAVORITE-SETTING.git ~/.config/nvim && bash ~/.config/nvim/install.sh
 ```
 
-El script es idempotente y lo instala TODO con verificación final ✓/✗:
-Xcode CLT, Homebrew, las 10 herramientas, fuente, la terminal
-**Ghostty** configurada a juego, el SDK de Flutter (omitible con
-`SIN_FLUTTER=1`), tu shell (`EDITOR=nvim`, aliases `v`/`lg`), los 65
-plugins, 26 parsers y los 21 paquetes de Mason — verificados en disco.
+**Frontera clara**: lo de sistema lo instalas tú de forma natural en Mac
+(Xcode CLT, Homebrew, y si quieres Ghostty/Flutter) — el script solo lo
+verifica y te dice el comando exacto si falta. Lo del **editor** sí lo
+hace todo él, idempotente y con verificación final ✓/✗: las 10
+herramientas por brew, la fuente, tu shell (`EDITOR=nvim`, aliases
+`v`/`lg`), los 65 plugins, 26 parsers y los 21 paquetes de Mason
+verificados en disco.
 
 **Solo el editor (si ya tienes las herramientas):**
 

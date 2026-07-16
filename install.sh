@@ -5,22 +5,28 @@
 #  USO (un solo comando):
 #    git clone https://github.com/ChristianBarillas/NVIM-FAVORITE-SETTING.git ~/.config/nvim && bash ~/.config/nvim/install.sh
 #
+#  FRONTERA DEL SCRIPT (decisión del dueño del repo):
+#    · Las cosas de SISTEMA las instalas TÚ, de forma natural en Mac:
+#      Command Line Tools de Xcode, Homebrew, Flutter, apps (Ghostty...).
+#      El script solo las VERIFICA y te dice el comando exacto si faltan.
+#    · El script instala únicamente el ÁMBITO DEL EDITOR:
+#      herramientas de terminal por brew, la fuente de íconos, la config
+#      en su lugar, plugins, parsers y paquetes de Mason.
+#
 #  Qué hace (todo idempotente: se puede re-ejecutar sin miedo):
-#    1. Command Line Tools de Xcode (compilador para treesitter/fzf)
-#    2. Homebrew (+ shellenv en ~/.zprofile)
-#    3. Herramientas: neovim git node python ripgrep fd fzf
+#    1. VERIFICA requisitos de sistema (CLT de Xcode, Homebrew) — no
+#       los instala; si faltan, te muestra cómo y se detiene
+#    2. Herramientas de terminal: neovim git node python ripgrep fd fzf
 #       tree-sitter-cli lazygit gh
-#    4. Casks: Nerd Font, Ghostty (terminal), Flutter SDK
-#    5. Config en su lugar (~/.config/nvim) con respaldo de lo previo
-#    6. Ghostty configurada + zshrc (EDITOR=nvim, aliases v/lg)
-#    7. Plugins (lazy.nvim), parsers de treesitter, y TODOS los
+#    3. Fuente JetBrainsMono Nerd Font (cask)
+#    4. Config en su lugar (~/.config/nvim) con respaldo de lo previo
+#    5. Config de Ghostty (solo si YA tienes Ghostty) + zshrc
+#    6. Plugins (lazy.nvim), parsers de treesitter, y TODOS los
 #       paquetes de Mason (LSPs, formateadores, linters, debuggers)
-#    8. Verificación final con resumen ✓/✗
+#    7. Verificación final con resumen ✓/✗ (incluye estado de Flutter,
+#       Ghostty y gh auth como informativos)
 #
-#  Variables opcionales:
-#    SIN_FLUTTER=1 bash install.sh    # omite el SDK de Flutter (~3 GB)
-#
-#  La guía completa de lo que se instala está en INSTALL.md
+#  La guía completa está en INSTALL.md
 # ══════════════════════════════════════════════════════════════════════
 set -uo pipefail
 
@@ -41,38 +47,59 @@ paso_critico() { # paso_critico "descripción" comando...
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 NVIM_CFG="$HOME/.config/nvim"
 
-# ── 1. Command Line Tools de Xcode ────────────────────────────────────
-info "1/8 · Command Line Tools de Xcode (compilador C)"
-if ! xcode-select -p >/dev/null 2>&1; then
-  avisa "Faltan las Command Line Tools. Se abrirá un diálogo: acéptalo."
-  xcode-select --install >/dev/null 2>&1 || true
-  until xcode-select -p >/dev/null 2>&1; do
-    printf '   esperando a que termine la instalación de CLT...\r'
-    sleep 15
-  done
-  echo
-fi
-ok "Command Line Tools"
+# ── 1. Requisitos de sistema: SOLO SE VERIFICAN, los instalas tú ──────
+info "1/7 · Verificando requisitos de sistema (no se instalan solos)"
 
-# ── 2. Homebrew ───────────────────────────────────────────────────────
-info "2/8 · Homebrew"
-if ! command -v brew >/dev/null 2>&1; then
-  # Instalador oficial (pedirá tu contraseña de usuario, es normal)
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if xcode-select -p >/dev/null 2>&1; then
+  ok "Command Line Tools de Xcode"
+else
+  falla "Faltan las Command Line Tools de Xcode (compilador C)."
+  cat <<'EOF'
+
+   Instálalas tú, de forma natural en Mac (una sola vez):
+
+       xcode-select --install
+
+   Acepta el diálogo, espera a que termine, y vuelve a correr este
+   script. (Si tienes Xcode completo de la App Store, también sirve.)
+EOF
+  exit 1
 fi
-# Activar brew en esta sesión y dejarlo permanente en ~/.zprofile
+
+# Activar brew en esta sesión si existe (Apple Silicon o Intel)
 for BREW_BIN in /opt/homebrew/bin/brew /usr/local/bin/brew; do
   [ -x "$BREW_BIN" ] && eval "$("$BREW_BIN" shellenv)" && break
 done
-command -v brew >/dev/null 2>&1 || { falla "Homebrew no quedó disponible"; exit 1; }
-if ! grep -q 'brew shellenv' "$HOME/.zprofile" 2>/dev/null; then
-  printf '\neval "$(%s shellenv)"\n' "$(command -v brew)" >> "$HOME/.zprofile"
-  ok "brew shellenv agregado a ~/.zprofile"
-fi
-ok "Homebrew $(brew --version | head -1 | awk '{print $2}')"
+if command -v brew >/dev/null 2>&1; then
+  ok "Homebrew $(brew --version | head -1 | awk '{print $2}')"
+  if ! grep -q 'brew shellenv' "$HOME/.zprofile" 2>/dev/null; then
+    printf '\neval "$(%s shellenv)"\n' "$(command -v brew)" >> "$HOME/.zprofile"
+    ok "brew shellenv agregado a ~/.zprofile (para nuevas terminales)"
+  fi
+else
+  falla "Falta Homebrew."
+  cat <<'EOF'
 
-# ── 3. Herramientas de terminal (formulas) ────────────────────────────
-info "3/8 · Herramientas (brew install)"
+   Instálalo tú con el comando oficial de https://brew.sh :
+
+       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+   Al terminar sigue las 2 líneas de "Next steps" que imprime, y
+   vuelve a correr este script.
+EOF
+  exit 1
+fi
+
+# Informativos (opcionales, también los instalas tú si los quieres):
+command -v flutter >/dev/null 2>&1 \
+  && ok "Flutter SDK detectado (el soporte del editor se activa solo)" \
+  || avisa "Flutter no está (opcional). Cuando lo quieras: brew install --cask flutter"
+[ -d "/Applications/Ghostty.app" ] \
+  && ok "Ghostty detectada" \
+  || avisa "Ghostty no está (opcional, recomendada). Cuando la quieras: brew install --cask ghostty"
+
+# ── 2. Herramientas de terminal (formulas) ────────────────────────────
+info "2/7 · Herramientas del editor (brew install)"
 FORMULAS=(neovim git node python ripgrep fd fzf tree-sitter-cli lazygit gh)
 for f in "${FORMULAS[@]}"; do
   if brew list --formula "$f" >/dev/null 2>&1; then
@@ -82,20 +109,16 @@ for f in "${FORMULAS[@]}"; do
   fi
 done
 
-# ── 4. Fuente, terminal y Flutter (casks) ─────────────────────────────
-info "4/8 · Fuente con íconos, Ghostty y Flutter"
-CASKS=(font-jetbrains-mono-nerd-font ghostty)
-[ "${SIN_FLUTTER:-0}" = "1" ] && avisa "SIN_FLUTTER=1: se omite el SDK de Flutter" || CASKS+=(flutter)
-for c in "${CASKS[@]}"; do
-  if brew list --cask "$c" >/dev/null 2>&1; then
-    ok "$c (ya estaba)"
-  else
-    paso_critico "$c" brew install --cask "$c"
-  fi
-done
+# ── 3. Fuente con íconos (único cask: es un recurso del editor) ───────
+info "3/7 · Fuente JetBrainsMono Nerd Font"
+if brew list --cask font-jetbrains-mono-nerd-font >/dev/null 2>&1; then
+  ok "font-jetbrains-mono-nerd-font (ya estaba)"
+else
+  paso_critico "font-jetbrains-mono-nerd-font" brew install --cask font-jetbrains-mono-nerd-font
+fi
 
-# ── 5. La configuración en su lugar (~/.config/nvim) ──────────────────
-info "5/8 · Configuración de Neovim en ~/.config/nvim"
+# ── 4. La configuración en su lugar (~/.config/nvim) ──────────────────
+info "4/7 · Configuración de Neovim en ~/.config/nvim"
 mkdir -p "$HOME/.config"
 REAL_CFG="$(readlink -f "$NVIM_CFG" 2>/dev/null || echo '')"
 if [ "$REAL_CFG" = "$SCRIPT_DIR" ]; then
@@ -111,10 +134,12 @@ else
   ok "Symlink creado: ~/.config/nvim → $SCRIPT_DIR"
 fi
 
-# ── 6. Ghostty y zsh ──────────────────────────────────────────────────
-info "6/8 · Terminal y shell"
+# ── 5. Ghostty (solo config, y solo si TÚ ya la instalaste) y zsh ─────
+info "5/7 · Terminal y shell"
 GHOSTTY_CFG="$HOME/.config/ghostty/config"
-if [ ! -f "$GHOSTTY_CFG" ]; then
+if [ ! -d "/Applications/Ghostty.app" ]; then
+  avisa "Ghostty no está instalada: no se escribe su configuración."
+elif [ ! -f "$GHOSTTY_CFG" ]; then
   mkdir -p "$(dirname "$GHOSTTY_CFG")"
   cat > "$GHOSTTY_CFG" <<'EOF'
 # Configuración de Ghostty — a juego con NVIM-FAVORITE-SETTING
@@ -148,8 +173,8 @@ else
   ok "~/.zshrc ya estaba configurado"
 fi
 
-# ── 7. Plugins, parsers y paquetes de Mason (headless) ────────────────
-info "7/8 · Plugins, sintaxis y servidores de lenguaje (esto tarda unos minutos)"
+# ── 6. Plugins, parsers y paquetes de Mason (headless) ────────────────
+info "6/7 · Plugins, sintaxis y servidores de lenguaje (esto tarda unos minutos)"
 
 info "   Plugins con lazy.nvim..."
 if nvim --headless "+Lazy! sync" +qa >/dev/null 2>&1; then
@@ -225,8 +250,8 @@ else
   FALLAS=$((FALLAS+1))
 fi
 
-# ── 8. Verificación final ─────────────────────────────────────────────
-info "8/8 · Verificación final"
+# ── 7. Verificación final ─────────────────────────────────────────────
+info "7/7 · Verificación final"
 
 for cmd in nvim git node rg fd fzf tree-sitter lazygit gh; do
   if command -v "$cmd" >/dev/null 2>&1; then ok "comando: $cmd"; else falla "comando: $cmd"; FALLAS=$((FALLAS+1)); fi
@@ -241,7 +266,7 @@ fi
 NPARSERS="$(ls "$HOME/.local/share/nvim/site/parser" 2>/dev/null | wc -l | tr -d ' ')"
 [ "${NPARSERS:-0}" -ge 25 ] && ok "Parsers de treesitter: $NPARSERS" || { falla "Parsers: solo $NPARSERS (esperados ≥25)"; FALLAS=$((FALLAS+1)); }
 
-command -v flutter >/dev/null 2>&1 && ok "Flutter SDK: $(flutter --version 2>/dev/null | head -1 | awk '{print $2}')" || avisa "Flutter no instalado (SIN_FLUTTER=1 u omitido)"
+command -v flutter >/dev/null 2>&1 && ok "Flutter SDK: $(flutter --version 2>/dev/null | head -1 | awk '{print $2}')" || avisa "Flutter no instalado (opcional; el soporte del editor se activa solo al instalarlo)"
 
 # ── Resumen y pasos manuales ──────────────────────────────────────────
 echo
@@ -254,14 +279,18 @@ else
 fi
 cat <<'EOF'
 
-  Pasos manuales que ninguna máquina puede hacer por ti:
-   1. Abre la app "Ghostty" (Cmd+Espacio → Ghostty) — ya está configurada.
-   2. GitHub CLI:      gh auth login        (para PRs/issues con \gp)
-   3. Identidad git:   git config --global user.name  "Tu Nombre"
-                       git config --global user.email "tu@email"
-   4. (Solo si harás apps móviles)  flutter doctor  y sigue sus pasos.
+  Cosas de sistema que instalas TÚ cuando quieras (el script no las toca):
+   · Terminal recomendada:  brew install --cask ghostty
+     (si ya está, este script le deja la config a juego con el editor)
+   · Flutter:               brew install --cask flutter
+     y para apps móviles:   flutter doctor
 
-  Para empezar:  abre Ghostty  →  v .
+  Pasos manuales de identidad (por seguridad no se automatizan):
+   · GitHub CLI:     gh auth login        (para PRs/issues con \gp)
+   · Identidad git:  git config --global user.name  "Tu Nombre"
+                     git config --global user.email "tu@email"
+
+  Para empezar:  abre tu terminal  →  v .
   Guía de atajos dentro de Neovim:  :Guia
 EOF
 exit "$FALLAS"

@@ -5,6 +5,21 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.4.1] - 2026-07-16
+
+### Cambiado
+- **Frontera de install.sh** (decisión del dueño): el script YA NO
+  instala cosas de sistema — Command Line Tools de Xcode, Homebrew,
+  Flutter SDK ni Ghostty. Esas se instalan a mano, de forma natural en
+  Mac; el script las **verifica** y, si faltan las obligatorias
+  (CLT/brew), imprime el comando exacto y se detiene. Ghostty y Flutter
+  quedan como opcionales informativos (la config de Ghostty solo se
+  escribe si la app ya existe; el soporte de Flutter se activa solo).
+  El único cask que instala el script es la Nerd Font (recurso del
+  editor). Se eliminó la variable `SIN_FLUTTER`.
+- INSTALL.md reorganizado: "Paso 0 — lo que instalas tú" + tabla de la
+  frontera script/usuario. Regla protegida en AGENTS.md.
+
 ## [2.4.0] - 2026-07-16
 
 Migración a máquina nueva con un solo comando, sin omisiones.

@@ -68,6 +68,11 @@ colorizer/zen), `git.lua`, `terminal.lua` (toggleterm+lazygit),
    correspondiente en install.sh y el inventario de INSTALL.md. Fuentes
    de verdad: `lsp.lua` (ensure_installed + tool-installer), `dap.lua`
    (adaptadores), `treesitter.lua` (parsers).
+   **FRONTERA (regla del dueño, 2026-07)**: install.sh NUNCA instala
+   cosas de sistema — Xcode/CLT, Homebrew, SDKs (Flutter) ni apps
+   (Ghostty): esas las instala el usuario a mano; el script solo las
+   verifica e imprime el comando exacto. El único cask permitido es la
+   Nerd Font (recurso del editor). No revertir esto.
 10. **Íconos Nerd Font SIEMPRE con escape explícito `'\u{XXXX}'`** en los
    strings de Lua (LuaJIT lo soporta), nunca pegando el glifo crudo: los
    glifos PUA se corrompen fácilmente al pasar por editores/pipelines

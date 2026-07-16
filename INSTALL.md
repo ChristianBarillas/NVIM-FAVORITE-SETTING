@@ -7,50 +7,70 @@
 
 ---
 
-## ⚡ El comando único
+## 🧭 La frontera: qué hace el script y qué haces tú
+
+**Regla de la casa**: las cosas de sistema se instalan **a mano, de
+forma natural en Mac** — el script jamás instala Xcode, Homebrew,
+Flutter ni aplicaciones. Solo las **verifica** y, si faltan, te muestra
+el comando exacto y se detiene con amabilidad.
+
+| Lo instalas TÚ (sistema) | Lo instala el SCRIPT (ámbito del editor) |
+|---|---|
+| Command Line Tools de Xcode | Herramientas de terminal vía brew (neovim, git, node, python, ripgrep, fd, fzf, tree-sitter-cli, lazygit, gh) |
+| Homebrew | Fuente JetBrainsMono Nerd Font (recurso del editor) |
+| Flutter SDK (opcional) | La config en `~/.config/nvim` (con respaldo de lo previo) |
+| Ghostty u otra terminal (opcional) | Config de Ghostty **solo si ya la tienes instalada** |
+| Xcode completo / Android Studio (móvil) | Bloque de `~/.zshrc` (EDITOR, aliases) y `brew shellenv` en `~/.zprofile` |
+| | 65 plugins + 26 parsers + 21 paquetes de Mason, verificados |
+
+## 🖐️ Paso 0 — Lo que instalas tú (una sola vez, ~10 min)
+
+```bash
+# 1. Compilador (diálogo de macOS, acéptalo y espera)
+xcode-select --install
+
+# 2. Homebrew (pedirá tu contraseña; sigue sus "Next steps" al final)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# 3. Opcionales, cuando tú quieras:
+brew install --cask ghostty      # terminal recomendada (true color)
+brew install --cask flutter      # SDK de Flutter (~3 GB)
+```
+
+## ⚡ El comando único (después del paso 0)
 
 ```bash
 git clone https://github.com/ChristianBarillas/NVIM-FAVORITE-SETTING.git ~/.config/nvim && bash ~/.config/nvim/install.sh
 ```
 
-Si no quieres el SDK de Flutter (~3 GB) todavía:
-
-```bash
-SIN_FLUTTER=1 bash ~/.config/nvim/install.sh
-```
-
 El script es **idempotente**: puedes correrlo las veces que quieras; lo
-que ya está instalado lo salta, lo que falta lo instala, y al final te
-da un resumen ✓/✗. Si algo falla (por internet, etc.), simplemente
-re-ejecútalo.
-
-### Requisitos previos
-
-- Una Mac con macOS (Apple Silicon o Intel — el script detecta ambos).
-- Tu contraseña de usuario (la pedirá el instalador de Homebrew, es normal).
-- Conexión a internet. Nada más.
+que ya está lo salta, lo que falta lo instala, y al final imprime un
+resumen ✓/✗. Si algo falla (internet, etc.), re-ejecútalo y continúa.
+Si instalas Ghostty o Flutter DESPUÉS, re-ejecuta el script y él
+escribe la config de Ghostty; el soporte de Flutter en el editor se
+activa solo.
 
 ### Tiempo estimado
 
 | Fase | Tiempo aprox. |
 |---|---|
-| Command Line Tools de Xcode (si faltan) | 3-5 min |
-| Homebrew + herramientas | 3-5 min |
-| Fuente + Ghostty | 1 min |
-| Flutter SDK (opcional) | 5-10 min |
-| Plugins + parsers + LSPs de Mason | 5-8 min |
-| **Total** | **~15-25 min** |
+| Paso 0 manual (CLT + Homebrew) | ~10 min |
+| Script: herramientas + fuente | 3-5 min |
+| Script: plugins + parsers + LSPs de Mason | 5-8 min |
+| **Total** | **~20 min** |
 
 ---
 
 ## 📦 Inventario completo (lo que el script instala, sin omisiones)
 
-### 1. Base del sistema
+### 1. Base del sistema (la instalas tú; el script solo verifica)
 
-| Qué | Cómo | Para qué |
+| Qué | Cómo la instalas tú | Para qué |
 |---|---|---|
 | Command Line Tools de Xcode | `xcode-select --install` | Compilador C (parsers de treesitter, fzf-native) |
-| Homebrew | instalador oficial | Gestor de paquetes; queda activado en `~/.zprofile` |
+| Homebrew | instalador oficial de brew.sh | Gestor de paquetes (el script sí agrega `brew shellenv` a `~/.zprofile`) |
+| Ghostty (opcional) | `brew install --cask ghostty` | Terminal con true color; el script le escribe la config si existe |
+| Flutter SDK (opcional) | `brew install --cask flutter` | Dart/Flutter; flutter-tools lo detecta solo |
 
 ### 2. Herramientas de terminal (brew, formulas)
 
@@ -67,20 +87,18 @@ re-ejecútalo.
 | `lazygit` | Git visual (`\gg` / `lg`) |
 | `gh` | GitHub CLI (lo usa Octo para PRs/issues) |
 
-### 3. Apps y fuente (brew, casks)
+### 3. Fuente (único cask que el script instala: es un recurso del editor)
 
 | Cask | Para qué |
 |---|---|
 | `font-jetbrains-mono-nerd-font` | Fuente con TODOS los íconos (Nerd Font v3) |
-| `ghostty` | Terminal recomendada: true color, rápida, config en texto |
-| `flutter` | SDK completo de Flutter/Dart (omitible con `SIN_FLUTTER=1`) |
 
 ### 4. Archivos de configuración que el script escribe/toca
 
 | Archivo | Qué hace el script |
 |---|---|
 | `~/.config/nvim` | Symlink al repo (si había algo, lo respalda como `nvim.respaldo.FECHA`) |
-| `~/.config/ghostty/config` | Tema `Solarized Osaka Night` + Nerd Font (solo si no existe) |
+| `~/.config/ghostty/config` | Tema `Solarized Osaka Night` + Nerd Font (solo si Ghostty está instalada Y no hay config previa) |
 | `~/.zshrc` | Bloque con `EDITOR=nvim`, `VISUAL=nvim`, `alias v='nvim'`, `alias lg='lazygit'` (solo si no está) |
 | `~/.zprofile` | `eval "$(brew shellenv)"` (solo si no está) |
 
@@ -120,24 +138,21 @@ así puedes usarlo en automatizaciones.
 
 ---
 
-## 👤 Pasos manuales (los únicos 4, por seguridad no se automatizan)
+## 👤 Pasos manuales de identidad (por seguridad no se automatizan)
 
-1. **Abrir Ghostty** la primera vez: Cmd+Espacio → "Ghostty" → Enter.
-   (Opcional: arrástrala al Dock. En Ajustes de Ghostty puedes ponerla
-   como terminal por defecto.)
-2. **Autenticar GitHub CLI** (para PRs/issues con `\gp`):
+1. **Autenticar GitHub CLI** (para PRs/issues con `\gp`):
    ```bash
    gh auth login
    # → GitHub.com → HTTPS → Login with a web browser
    ```
-3. **Identidad de git** (para poder commitear):
+2. **Identidad de git** (para poder commitear):
    ```bash
    git config --global user.name  "christian barillas"
    git config --global user.email "70426461+ChristianBarillas@users.noreply.github.com"
    ```
-4. **Solo para apps móviles**: `flutter doctor` te dirá qué falta del
-   toolchain móvil (Xcode completo para iOS, Android Studio para
-   Android). Para web/desktop no necesitas nada.
+3. **Solo para apps móviles** (si instalaste Flutter): `flutter doctor`
+   te dirá qué falta del toolchain móvil (Xcode completo para iOS,
+   Android Studio para Android). Para web/desktop no necesitas nada.
 
 💡 Recomendado (una vez): Ajustes del Sistema → Teclado → sube
 "Velocidad de repetición de tecla" al máximo y baja "Retardo hasta la
