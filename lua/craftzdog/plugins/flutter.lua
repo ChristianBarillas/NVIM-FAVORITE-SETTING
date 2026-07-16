@@ -13,6 +13,14 @@ return {
       lsp = {
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
       },
+      -- Integra el debugger de Flutter con nvim-dap (F5, breakpoints)
+      debugger = {
+        enabled = true,
+        register_configurations = function(_)
+          require('dap').configurations.dart = {}
+          require('dap.ext.vscode').load_launchjs()
+        end,
+      },
       widget_guides = { enabled = true },
       closing_tags = { enabled = true },
     })

@@ -30,3 +30,8 @@ vim.opt.signcolumn = 'yes' -- Keep the gutter open so text doesn't shift
 
 -- Add asterisks in block comments
 vim.opt.formatoptions:append { 'r' }
+
+-- :Guia abre la guía de comandos (COMANDOS.md) en un split vertical
+vim.api.nvim_create_user_command('Guia', function()
+  vim.cmd('vsplit ' .. vim.fn.stdpath('config') .. '/COMANDOS.md')
+end, { desc = 'Abrir la guía de atajos y comandos' })

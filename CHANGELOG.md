@@ -5,6 +5,24 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.3.0] - 2026-07-16
+
+El entorno alrededor del editor: terminal, shell y bootstrap.
+
+### Añadido
+- **`install.sh`**: instalación completa en una máquina nueva con un solo
+  comando (Homebrew, herramientas, fuente, Ghostty, zshrc, plugins y
+  parsers precargados).
+- **Terminal Ghostty** como recomendada (Terminal.app no soporta true
+  color): instalada por brew y configurada en `~/.config/ghostty/config`
+  con el tema `Solarized Osaka Night` (a juego con el editor) y la
+  JetBrainsMono Nerd Font — cero pasos manuales.
+- **Shell**: `EDITOR=nvim`/`VISUAL=nvim` y aliases `v` (nvim) y `lg`
+  (lazygit) en `~/.zshrc`.
+- **`:Guia`**: abre COMANDOS.md en un split desde dentro de Neovim.
+- **Debugger de Flutter**: flutter-tools registra su adaptador en
+  nvim-dap (`F5`/breakpoints también en Dart, lee launch.json).
+
 ## [2.2.0] - 2026-07-16
 
 Paridad con VS Code y flujo GitHub completo — el objetivo: no extrañar

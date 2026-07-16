@@ -10,6 +10,9 @@ Convenciones de esta guía:
 - Los comandos que empiezan con `:` se escriben en modo normal y terminan con Enter.
 - 💡 **Truco para aprender**: presiona `\` o `;` o `g` y espera medio segundo —
   **which-key** te muestra en pantalla todas las combinaciones disponibles.
+- 📖 `:Guia` abre esta guía dentro de Neovim en cualquier momento.
+- 🖥️ En la terminal: `v archivo` abre Neovim, `v .` abre el proyecto,
+  `lg` abre LazyGit (aliases ya configurados en tu zsh).
 
 ---
 

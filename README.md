@@ -89,17 +89,37 @@ Todo se instala con [Homebrew](https://brew.sh):
 
 ```bash
 # Editor y toolchain
-brew install neovim git node ripgrep fd tree-sitter-cli lazygit
+brew install neovim git node ripgrep fd tree-sitter-cli lazygit gh
 
-# Fuente con íconos (selecciónala luego en tu terminal)
-brew install --cask font-jetbrains-mono-nerd-font
+# Fuente con íconos y terminal recomendada
+brew install --cask font-jetbrains-mono-nerd-font ghostty
 ```
+
+> 💻 **Terminal**: se recomienda **Ghostty** (color verdadero, rápida,
+> config en texto plano). Terminal.app de macOS NO soporta true color y
+> degrada el tema. La config de Ghostty va en `~/.config/ghostty/config`
+> con el tema `Solarized Osaka Night` — a juego con el editor
+> (`install.sh` la escribe sola).
 
 - **Neovim 0.11 o superior** (probada con 0.12.4)
 - Un compilador de C para treesitter (en macOS: Xcode o `xcode-select --install`)
 - macOS, Linux o Windows/WSL (el portapapeles se configura solo según el SO)
 
 ## Instalación
+
+**Máquina nueva (todo automático):**
+
+```bash
+git clone https://github.com/ChristianBarillas/NVIM-FAVORITE-SETTING.git ~/.config/nvim
+cd ~/.config/nvim && bash install.sh
+```
+
+El script instala Homebrew si falta, todas las herramientas, la fuente,
+la terminal **Ghostty** (configurada a juego con el tema), deja
+`EDITOR=nvim` con aliases (`v`, `lg`) en el `.zshrc`, y precarga
+plugins y parsers.
+
+**Solo el editor (si ya tienes las herramientas):**
 
 ```bash
 git clone https://github.com/ChristianBarillas/NVIM-FAVORITE-SETTING.git ~/.config/nvim
@@ -181,7 +201,8 @@ La tecla líder es `\` (backslash). La guía completa por niveles está en
 
 | Problema | Solución |
 |---|---|
-| Íconos se ven como `▯` | Selecciona "JetBrainsMono Nerd Font" en tu terminal |
+| Íconos se ven como `▯` | Usa Ghostty (ya trae la fuente configurada) o selecciona "JetBrainsMono Nerd Font" en tu terminal |
+| Colores se ven mal | Terminal.app no soporta true color — usa Ghostty |
 | `tree-sitter no encontrado` | `brew install tree-sitter-cli` |
 | Un LSP no arranca | `:Mason` para ver el estado, `:LspInfo` en el buffer |
 | Formateo no funciona | `:ConformInfo` muestra el formateador activo |
