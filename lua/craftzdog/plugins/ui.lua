@@ -15,8 +15,9 @@ return {
         options = {
           icons_enabled = true,
           theme = 'solarized_dark',
-          section_separators = { left = '', right = '' },
-          component_separators = { left = '', right = '' },
+          -- separadores powerline por código explícito
+          section_separators = { left = '\u{E0B0}', right = '\u{E0B2}' },
+          component_separators = { left = '\u{E0B1}', right = '\u{E0B3}' },
           disabled_filetypes = {},
         },
         sections = {
@@ -31,7 +32,12 @@ return {
             {
               'diagnostics',
               sources = { 'nvim_diagnostic' },
-              symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+              symbols = {
+                error = '\u{F057} ',
+                warn = '\u{F071} ',
+                info = '\u{F05A} ',
+                hint = '\u{F0EB} ',
+              },
             },
             'encoding',
             'filetype',

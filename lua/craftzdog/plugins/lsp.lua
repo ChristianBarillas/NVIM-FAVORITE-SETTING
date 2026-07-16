@@ -107,11 +107,12 @@ return {
         severity_sort = true,
         float = { source = true },
         signs = {
+          -- Íconos por código explícito (\u{}) para que nunca se pierdan
           text = {
-            [vim.diagnostic.severity.ERROR] = ' ',
-            [vim.diagnostic.severity.WARN] = ' ',
-            [vim.diagnostic.severity.HINT] = '󰠠 ',
-            [vim.diagnostic.severity.INFO] = ' ',
+            [vim.diagnostic.severity.ERROR] = '\u{F057} ', --
+            [vim.diagnostic.severity.WARN] = '\u{F071} ', --
+            [vim.diagnostic.severity.HINT] = '\u{F0EB} ', --
+            [vim.diagnostic.severity.INFO] = '\u{F05A} ', --
           },
         },
       })

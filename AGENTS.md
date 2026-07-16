@@ -62,6 +62,13 @@ colorizer/zen), `git.lua`, `terminal.lua` (toggleterm+lazygit),
    reintroducir dependencias muertas.
 8. Herramientas de sistema: instalar por **Homebrew** siempre que exista
    formula (preferencia explícita del usuario).
+9. **Íconos Nerd Font SIEMPRE con escape explícito `'\u{XXXX}'`** en los
+   strings de Lua (LuaJIT lo soporta), nunca pegando el glifo crudo: los
+   glifos PUA se corrompen fácilmente al pasar por editores/pipelines
+   (ya ocurrió: quedaron espacios en blanco). Usar solo codepoints
+   válidos en Nerd Fonts v3 (el rango U+F500–U+FD46 de Material viejo
+   está MUERTO). Verificación:
+   `python3 -c "..."` escaneando PUA, o abrir nvim y mirar.
 
 ## Decisiones técnicas ya tomadas (no revertir sin razón)
 

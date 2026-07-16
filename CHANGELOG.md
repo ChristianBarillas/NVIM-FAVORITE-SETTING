@@ -5,6 +5,24 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.3.1] - 2026-07-16
+
+### Corregido
+- **Íconos que se veían mal**: los glifos de diagnósticos (gutter y
+  statusline), los separadores powerline de lualine y los íconos del
+  dashboard se habían corrompido al escribirse los archivos (quedaron
+  como espacios en blanco). Ahora todos los íconos se declaran con
+  escapes explícitos `'\u{XXXX}'` (codepoints FontAwesome/Material
+  válidos en Nerd Fonts v3), inmunes a corrupción por copy/paste.
+- Regla nueva en AGENTS.md: los íconos siempre por codepoint, nunca
+  glifo crudo.
+
+### Notas
+- Si aún se ven `▯`: la terminal debe usar una **Nerd Font**. Ghostty ya
+  viene configurada; en Terminal.app: Ajustes → Perfiles → Texto →
+  Fuente → "JetBrainsMono Nerd Font Mono". Los emojis (🔍 📁) no
+  necesitan nada: macOS los pone solo.
+
 ## [2.3.0] - 2026-07-16
 
 El entorno alrededor del editor: terminal, shell y bootstrap.
