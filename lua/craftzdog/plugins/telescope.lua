@@ -4,9 +4,11 @@ return {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope-file-browser.nvim',
     'nvim-tree/nvim-web-devicons',
+    -- ordenador fzf compilado en C: búsqueda mucho más rápida
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   cmd = 'Telescope',
-  keys = { ';f', ';r', '\\\\', ';t', ';;', ';e', 'sf' },
+  keys = { ';f', ';r', '\\\\', ';t', ';;', ';e', ';o', ';k', ';c', 'sf' },
   config = function()
     local telescope = require('telescope')
     local actions = require('telescope.actions')
@@ -52,6 +54,7 @@ return {
     })
 
     telescope.load_extension('file_browser')
+    telescope.load_extension('fzf')
 
     vim.keymap.set('n', ';f', function()
       builtin.find_files({
@@ -74,6 +77,15 @@ return {
     vim.keymap.set('n', ';e', function()
       builtin.diagnostics()
     end, { desc = 'Diagnósticos' })
+    vim.keymap.set('n', ';o', function()
+      builtin.oldfiles()
+    end, { desc = 'Archivos recientes' })
+    vim.keymap.set('n', ';k', function()
+      builtin.keymaps()
+    end, { desc = 'Buscar atajos de teclado' })
+    vim.keymap.set('n', ';c', function()
+      builtin.commands()
+    end, { desc = 'Paleta de comandos' })
     vim.keymap.set('n', 'sf', function()
       telescope.extensions.file_browser.file_browser({
         path = '%:p:h',

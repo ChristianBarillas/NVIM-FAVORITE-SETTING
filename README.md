@@ -64,6 +64,25 @@ SDK). Se activa automáticamente si `flutter` está instalado
 | **lualine** | Statusline con diagnósticos y rama de git |
 | autopairs, autotag, illuminate, guess-indent, indent-blankline, colorizer, zen-mode, markdown-preview | Detalles de calidad de vida |
 
+### Paridad con VS Code (y más allá)
+| Plugin | Equivalente en VS Code |
+|---|---|
+| **multicursor.nvim** | Multicursores: `Ctrl-D` siguiente coincidencia, `\ma` todas (Ctrl+Shift+L), `Ctrl-↑/↓` vertical |
+| **dropbar** | Breadcrumbs navegables arriba (`;b` para saltar por ellos) |
+| **aerial** | Outline de símbolos (`\o`) |
+| **nvim-ufo** | Plegado de código por LSP (`za`, `zR`, `zM`, `zp` vista previa) |
+| **treesitter-context** | Sticky scroll (la función actual fija arriba) |
+| **rainbow-delimiters** | Coloreado de pares de paréntesis |
+| **noice + notify** | Cmdline flotante, notificaciones toast, progreso del LSP |
+| **dashboard** | Pantalla de bienvenida con accesos rápidos |
+| **octo.nvim** | GitHub PRs e issues dentro del editor (`\gp`, `\gi`) |
+| **diffview** | Vista de diffs y historial de archivo (`\gd`, `\gh`) |
+| **gitsigns blame inline** | GitLens (autor y fecha al final de la línea actual) |
+| **harpoon 2** | Anclar 4 archivos y saltar al instante (`;a`, `;1`-`;4`, `;h`) |
+| **telescope-fzf-native** | Búsqueda fuzzy compilada en C (más rápida) |
+| **toggleterm múltiple** | Varias terminales: `\tf` flotante, `\th` horizontal, `\tv` vertical |
+| **telescope extras** | `;o` recientes, `;c` paleta de comandos, `;k` buscar atajos |
+
 ## Requisitos
 
 Todo se instala con [Homebrew](https://brew.sh):

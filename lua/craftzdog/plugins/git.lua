@@ -1,9 +1,12 @@
 return {
-  -- Señales de git en el gutter
+  -- Señales de git en el gutter + blame inline (estilo GitLens)
   {
     'lewis6991/gitsigns.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
-    opts = {},
+    opts = {
+      current_line_blame = true,
+      current_line_blame_opts = { delay = 700, virt_text_pos = 'eol' },
+    },
   },
 
   -- Git blame y abrir en GitHub

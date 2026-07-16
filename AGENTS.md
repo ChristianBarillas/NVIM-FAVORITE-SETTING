@@ -89,6 +89,16 @@ colorizer/zen), `git.lua`, `terminal.lua` (toggleterm+lazygit),
 - **Flutter usa flutter-tools.nvim** (NO mason): el LSP dartls viene con
   el SDK de Flutter. El spec tiene `cond = executable('flutter')` para no
   fallar sin SDK. Django: plantillas `htmldjango` se formatean con djlint.
+- **`Ctrl-D` es multicursor** (paridad VS Code), NO media-página-abajo.
+  Decisión consciente; paginar es `Ctrl-F`/`Ctrl-B`. multicursor.nvim va
+  pineado a la rama `1.0`.
+- **dropbar es dueño del winbar** (breadcrumbs); por eso
+  `symbol_in_winbar` de lspsaga sigue desactivado.
+- noice.nvim maneja cmdline/mensajes; sus overrides de hover/signature
+  están apagados porque lspsaga da el hover (`K`).
+- octo.nvim requiere `gh` autenticado (ya lo está en esta máquina).
+- El dashboard llama al comando `:LazyGit` (user command creado por
+  terminal.lua; lazy lo stubbed vía `cmd`), no a la función interna.
 
 ## Cómo verificar cambios (headless, sin abrir la UI)
 

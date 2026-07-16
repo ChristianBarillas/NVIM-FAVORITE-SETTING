@@ -13,6 +13,11 @@ return {
     config = function()
       -- Capacidades de autocompletado para todos los servidores
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
+      -- y de plegado de código (nvim-ufo)
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
       vim.lsp.config('*', { capabilities = capabilities })
 
       vim.lsp.config('lua_ls', {

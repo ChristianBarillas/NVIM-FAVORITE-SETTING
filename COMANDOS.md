@@ -89,12 +89,18 @@ Vim tiene modos. Todo lo demás depende de esto:
 |---|---|
 | `;f` | 🔍 buscar archivo por nombre (como Cmd+P en VS Code) |
 | `;r` | 🔍 buscar texto en TODO el proyecto |
+| `;o` | 🕐 archivos recientes |
+| `;c` | 🎨 paleta de comandos (como Cmd+Shift+P) |
 | `Ctrl-n` | 🌲 árbol de archivos lateral (otra vez `Ctrl-n` lo cierra) |
 | `sf` | 📁 explorador flotante de la carpeta del archivo actual |
 | `Espacio` | saltar a la siguiente ventana |
 | `Tab` / `Shift-Tab` | siguiente / anterior pestaña |
 | `Ctrl-a` | seleccionar todo |
 | `\?` | ver todos los atajos del buffer (which-key) |
+| `;k` | buscar cualquier atajo por nombre |
+
+Al abrir `nvim` sin archivo aparece el **dashboard**: `f` buscar, `r`
+recientes, `s` restaurar sesión, `l` LazyGit, `q` salir.
 
 Dentro del árbol de archivos (`Ctrl-n`): muévete con `j`/`k`, abre con
 `Enter`, crea archivo con `a`, renombra con `r`, borra con `d`, `?` muestra
@@ -161,6 +167,37 @@ Python, djlint para plantillas Django, stylua para Lua).
 | `:FlutterQuit` | detener la app |
 | `:FlutterOutlineToggle` | árbol de widgets lateral |
 
+### Multicursores (como VS Code)
+
+| Atajo | Acción |
+|---|---|
+| `Ctrl-d` | agregar cursor en la siguiente coincidencia de la palabra (VS Code Ctrl+D) |
+| `\ma` | cursores en TODAS las coincidencias (VS Code Ctrl+Shift+L) |
+| `Ctrl-↑` / `Ctrl-↓` | agregar cursor arriba / abajo |
+| `Ctrl-s` (con cursores) | saltarse esta coincidencia |
+| `Esc` | quitar los multicursores |
+
+> ⚠️ `Ctrl-d` ya no baja media página: usa `Ctrl-f`/`Ctrl-b` para paginar.
+
+### Ver el código como en un IDE
+
+| Atajo | Acción |
+|---|---|
+| `\o` | outline: panel lateral con los símbolos del archivo |
+| `;b` | navegar los breadcrumbs (ruta de símbolos de arriba) |
+| `za` | abrir/cerrar el pliegue bajo el cursor |
+| `zR` / `zM` | abrir / cerrar todos los pliegues |
+| `zp` | ver el contenido de un pliegue sin abrirlo |
+| — | sticky scroll: la función actual queda fija arriba sola |
+
+### Archivos anclados (Harpoon)
+
+| Atajo | Acción |
+|---|---|
+| `;a` | anclar el archivo actual |
+| `;1` `;2` `;3` `;4` | saltar al archivo anclado 1-4 |
+| `;h` | menú de anclados (edítalo como texto) |
+
 ### Ventanas y pestañas como senior
 
 | Atajo | Acción |
@@ -172,22 +209,32 @@ Python, djlint para plantillas Django, stylua para Lua).
 | `Ctrl-w o` | modo zen (solo el archivo actual, sin ruido) |
 | `te` | nueva pestaña (escribe el nombre del archivo y Enter) |
 
-### Git sin salir del editor
+### Git y GitHub sin salir del editor
 
 | Atajo | Acción |
 |---|---|
 | `\gg` | 🚀 **LazyGit**: stage, commit, push, branches, todo visual |
+| `\gd` | diff visual de tus cambios (abrir/cerrar) |
+| `\gh` | historial de commits del archivo actual |
+| `\gp` | 🐙 **GitHub: lista de pull requests** (revisar, comentar, aprobar) |
+| `\gi` | 🐙 GitHub: lista de issues |
 | `\gb` | blame de la línea (quién y cuándo) |
 | `\go` | abrir el archivo en GitHub |
+| — | blame inline: la línea actual muestra autor y fecha sola |
 
 Dentro de LazyGit: `espacio` hace stage, `c` commit, `P` push, `?` ayuda.
+Con Octo: `:Octo pr checkout` trae el PR, `:Octo review start` para
+revisar código comentando línea por línea.
 
-### Terminal integrada
+### Terminales integradas
 
 | Atajo | Acción |
 |---|---|
-| `Ctrl-\` | abrir/cerrar terminal flotante |
+| `Ctrl-\` | abrir/cerrar terminal flotante principal |
+| `\tf` / `\th` / `\tv` | terminal flotante / horizontal / vertical |
+| `2Ctrl-\` | segunda terminal (3, 4... con el número delante) |
 | `Esc Esc` (en terminal) | pasar la terminal a modo normal (para copiar output) |
+| `:LazyGit` | LazyGit (igual que `\gg`) |
 
 ### Edición avanzada
 

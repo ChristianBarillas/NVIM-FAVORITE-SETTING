@@ -7,9 +7,11 @@ return {
     spec = {
       { '<leader>c', group = 'Código' },
       { '<leader>d', group = 'Debug' },
-      { '<leader>g', group = 'Git' },
+      { '<leader>g', group = 'Git/GitHub' },
+      { '<leader>m', group = 'Multicursor' },
       { '<leader>q', group = 'Sesión' },
       { '<leader>s', group = 'Buscar/Reemplazar' },
+      { '<leader>t', group = 'Terminal' },
       { '<leader>x', group = 'Diagnósticos' },
     },
   },

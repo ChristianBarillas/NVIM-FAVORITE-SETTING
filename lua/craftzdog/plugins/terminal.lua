@@ -2,10 +2,13 @@
 return {
   'akinsho/toggleterm.nvim',
   version = '*',
-  cmd = 'ToggleTerm',
+  cmd = { 'ToggleTerm', 'LazyGit' },
   keys = {
     { [[<C-\>]], desc = 'Terminal integrada' },
-    { '<leader>gg', desc = 'LazyGit' },
+    { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+    { '<leader>tf', '<cmd>ToggleTerm direction=float<cr>', desc = 'Terminal flotante' },
+    { '<leader>th', '<cmd>ToggleTerm size=15 direction=horizontal<cr>', desc = 'Terminal horizontal' },
+    { '<leader>tv', '<cmd>ToggleTerm size=60 direction=vertical<cr>', desc = 'Terminal vertical' },
   },
   config = function()
     require('toggleterm').setup({
@@ -25,8 +28,8 @@ return {
       direction = 'float',
       float_opts = { border = 'rounded' },
     })
-    vim.keymap.set('n', '<leader>gg', function()
+    vim.api.nvim_create_user_command('LazyGit', function()
       lazygit:toggle()
-    end, { desc = 'LazyGit' })
+    end, { desc = 'Abrir/cerrar LazyGit' })
   end,
 }

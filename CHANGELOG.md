@@ -5,6 +5,36 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.2.0] - 2026-07-16
+
+Paridad con VS Code y flujo GitHub completo — el objetivo: no extrañar
+ninguna UI.
+
+### Añadido
+- **Multicursores** (multicursor.nvim, rama 1.0): `Ctrl-D` agrega cursor
+  en la siguiente coincidencia (como VS Code), `\ma` en todas
+  (Ctrl+Shift+L), `Ctrl-↑/↓` cursores verticales, `Ctrl-S` salta una,
+  `Esc` limpia. ⚠️ `Ctrl-D` ya no es "media página abajo" (usar
+  `Ctrl-F`/`Ctrl-B`).
+- **UI moderna**: noice.nvim (cmdline flotante, mensajes, progreso LSP) +
+  nvim-notify (toasts) + dashboard-nvim (pantalla de inicio con accesos:
+  buscar, recientes, sesión, LazyGit, Lazy, Mason).
+- **Breadcrumbs**: dropbar.nvim en el winbar, `;b` para navegarlos.
+- **Outline de símbolos**: aerial.nvim (`\o`).
+- **Plegado inteligente**: nvim-ufo con provider LSP (`za`, `zR`, `zM`,
+  `zp` para vista previa); capacidad foldingRange agregada al LSP.
+- **Sticky scroll**: nvim-treesitter-context (máx. 4 líneas).
+- **Paréntesis de colores**: rainbow-delimiters.nvim.
+- **GitHub en el editor**: octo.nvim (`\gp` PRs, `\gi` issues; usa gh CLI)
+  y diffview.nvim (`\gd` diff de cambios, `\gh` historial del archivo).
+- **Blame inline estilo GitLens**: gitsigns `current_line_blame`.
+- **Harpoon 2**: anclar archivos (`;a`) y saltar (`;1`-`;4`, menú `;h`).
+- **Telescope**: fzf-native compilado (búsqueda más rápida), `;o`
+  recientes, `;k` atajos, `;c` paleta de comandos.
+- **Terminales múltiples**: `\tf` flotante, `\th` horizontal, `\tv`
+  vertical (además del `Ctrl-\` de siempre); comando `:LazyGit`.
+- Grupos nuevos en which-key: Terminal (`\t`), Multicursor (`\m`).
+
 ## [2.1.0] - 2026-07-16
 
 Stack completo para el trabajo real del usuario: Flutter, Python/Django,
