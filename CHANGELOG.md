@@ -5,6 +5,13 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.4.2] - 2026-07-16
+
+### Añadido
+- Aliases `vim` y `neovim` → `nvim` en el bloque de `~/.zshrc` (el
+  binario real se llama `nvim`; así cualquier nombre funciona).
+  COMANDOS.md lo aclara.
+
 ## [2.4.1] - 2026-07-16
 
 ### Cambiado

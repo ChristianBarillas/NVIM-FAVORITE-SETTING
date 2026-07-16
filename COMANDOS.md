@@ -11,8 +11,9 @@ Convenciones de esta guía:
 - 💡 **Truco para aprender**: presiona `\` o `;` o `g` y espera medio segundo —
   **which-key** te muestra en pantalla todas las combinaciones disponibles.
 - 📖 `:Guia` abre esta guía dentro de Neovim en cualquier momento.
-- 🖥️ En la terminal: `v archivo` abre Neovim, `v .` abre el proyecto,
-  `lg` abre LazyGit (aliases ya configurados en tu zsh).
+- 🖥️ En la terminal: **el comando real es `nvim`**, y además tienes los
+  aliases `v`, `vim` y `neovim` (los tres abren lo mismo). `v .` abre el
+  proyecto actual, `lg` abre LazyGit.
 
 ---
 

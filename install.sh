@@ -165,6 +165,8 @@ if ! grep -q "EDITOR=nvim" "$HOME/.zshrc" 2>/dev/null; then
 export EDITOR=nvim
 export VISUAL=nvim
 alias v='nvim'          # v archivo.txt  |  v .
+alias vim='nvim'        # por costumbre
+alias neovim='nvim'     # por si escribes el nombre completo
 alias lg='lazygit'      # git visual en la terminal
 # ──────────────────────────────────────────────────────────────────────
 EOF
