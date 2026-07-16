@@ -204,6 +204,7 @@ La tecla líder es `\` (backslash). La guía completa por niveles está en
 
 | Problema | Solución |
 |---|---|
+| `:Lazy` muestra muchos "not loaded" | **Es normal y deseable**: carga perezosa. Los plugins despiertan al usarlos (`;f` carga telescope, `F5` el debugger, un `.dart` carga flutter-tools...). Al arrancar solo cargan ~3 de 65 — por eso abre instantáneo. Problema sería ✗ rojo/failed, no "not loaded" |
 | Íconos se ven como `▯` | Usa Ghostty (ya trae la fuente configurada) o selecciona "JetBrainsMono Nerd Font" en tu terminal |
 | Colores se ven mal | Terminal.app no soporta true color — usa Ghostty |
 | `tree-sitter no encontrado` | `brew install tree-sitter-cli` |
