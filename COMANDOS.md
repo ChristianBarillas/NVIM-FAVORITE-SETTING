@@ -383,6 +383,32 @@ prefijo es `Ctrl-b`: presiónalo, suéltalo, y luego la tecla del comando.
 | `Ctrl-b [` | modo scroll/copiar (sal con `q`; copia estilo vim: `v` y `y`) |
 | `Ctrl-b r` | recargar la configuración |
 
+**Copiar y pegar SIN MOUSE (los 3 contextos):**
+
+*a) Estás en la terminal (tmux) y quieres copiar output:*
+
+1. `Ctrl-b [` — entras a modo copia (puedes moverte por todo el historial)
+2. Navega con `h j k l`, `w`/`b`, `gg`/`G`, `Ctrl-u`/`Ctrl-d`, o **busca
+   con `?texto`** + Enter (busca hacia arriba; `n` repite)
+3. `v` — empiezas a seleccionar (muévete para extender)
+4. `y` — copiado al portapapeles de macOS ✅ (y sales solo)
+5. Pega donde sea: `Cmd+V` en el navegador, `p` en Neovim, o
+   `Ctrl-b ]` en otra terminal de tmux
+
+*b) Estás en la terminal DE NEOVIM (`Ctrl-\`):*
+
+1. `Esc Esc` — la terminal se congela y se vuelve texto normal de vim
+2. Navega y busca como siempre (`?error` + Enter, `hjkl`...)
+3. `v` selecciona, `y` copia → ya está en el portapapeles del sistema
+4. `i` para devolverle la vida a la terminal
+
+*c) Estás editando código en Neovim:*
+
+- `yy` copia la línea · `y` + movimiento (`yiw` palabra, `yap` párrafo)
+- `v`/`V` seleccionar + `y` · pegar con `p` (abajo/después) o `P`
+- Todo va al portapapeles de macOS automáticamente (y `Cmd+C` de
+  afuera se pega adentro con `p`)
+
 **El flujo con servidores SSH** (para esto lo instalaste):
 
 ```bash

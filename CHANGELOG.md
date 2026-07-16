@@ -5,6 +5,17 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.5.1] - 2026-07-16
+
+### Corregido
+- **Copiado estilo vim en tmux ahora es real**: `v` selecciona, `y`
+  copia al portapapeles de macOS, `Esc` cancela, `Ctrl-v` selección
+  rectangular (por defecto tmux usaba Espacio/Enter y `v` hacía otra
+  cosa). Además `set-clipboard on` para que lo copiado llegue al
+  sistema vía OSC52/Ghostty.
+- COMANDOS.md: guía de copiar/pegar sin mouse en los 3 contextos
+  (tmux, terminal de Neovim, código).
+
 ## [2.5.0] - 2026-07-16
 
 ### Añadido
