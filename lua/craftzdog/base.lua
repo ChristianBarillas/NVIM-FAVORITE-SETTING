@@ -31,6 +31,18 @@ vim.opt.signcolumn = 'yes' -- Keep the gutter open so text doesn't shift
 -- Add asterisks in block comments
 vim.opt.formatoptions:append { 'r' }
 
+-- MOUSE DESACTIVADO a propósito: entrenamiento 100% teclado.
+-- Emergencia: :MouseOn lo reactiva en la sesión actual, :MouseOff lo apaga.
+vim.opt.mouse = ''
+vim.api.nvim_create_user_command('MouseOn', function()
+  vim.opt.mouse = 'a'
+  vim.notify('Mouse activado (solo esta sesión)')
+end, { desc = 'Activar el mouse temporalmente' })
+vim.api.nvim_create_user_command('MouseOff', function()
+  vim.opt.mouse = ''
+  vim.notify('Mouse desactivado — modo ninja 🥷')
+end, { desc = 'Desactivar el mouse' })
+
 -- :Guia abre la guía de comandos (COMANDOS.md) en un split vertical
 vim.api.nvim_create_user_command('Guia', function()
   vim.cmd('vsplit ' .. vim.fn.stdpath('config') .. '/COMANDOS.md')

@@ -5,6 +5,14 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.5.2] - 2026-07-16
+
+### Cambiado
+- **Mouse desactivado en Neovim** (`mouse = ''`) a petición del usuario:
+  entrenamiento 100% teclado. Comandos de emergencia `:MouseOn` /
+  `:MouseOff` para la sesión actual. (El mouse de tmux sigue activo
+  para scroll en terminales.)
+
 ## [2.5.1] - 2026-07-16
 
 ### Corregido

@@ -32,6 +32,10 @@ Vim tiene modos. Todo lo demás depende de esto:
 
 > Regla de oro: si no sabes en qué modo estás, presiona `Esc` (o `Esc Esc`).
 
+> 🥷 **El mouse está DESACTIVADO a propósito** en este Neovim
+> (entrenamiento puro de teclado). Si algún día lo necesitas de
+> emergencia: `:MouseOn` lo activa solo por esa sesión.
+
 ### Abrir, guardar, salir
 
 | Comando | Acción |
