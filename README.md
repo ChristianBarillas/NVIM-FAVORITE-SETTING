@@ -79,6 +79,7 @@ SDK). Se activa automáticamente si `flutter` está instalado
 | **diffview** | Vista de diffs y historial de archivo (`\gd`, `\gh`) |
 | **gitsigns blame inline** | GitLens (autor y fecha al final de la línea actual) |
 | **harpoon 2** | Anclar 4 archivos y saltar al instante (`;a`, `;1`-`;4`, `;h`) |
+| **render-markdown** | Vista renderizada de Markdown dentro del editor (como el preview de VS Code, pero inline) |
 | **telescope-fzf-native** | Búsqueda fuzzy compilada en C (más rápida) |
 | **toggleterm múltiple** | Varias terminales: `\tf` flotante, `\th` horizontal, `\tv` vertical |
 | **telescope extras** | `;o` recientes, `;c` paleta de comandos, `;k` buscar atajos |

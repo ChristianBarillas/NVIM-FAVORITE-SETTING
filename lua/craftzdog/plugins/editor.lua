@@ -26,6 +26,18 @@ return {
     end,
   },
 
+  -- Markdown bonito DENTRO del editor (títulos, tablas, checkboxes)
+  -- La línea donde editas se muestra cruda; el resto, renderizado.
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    ft = { 'markdown' },
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = {},
+  },
+
   -- Vista previa de Markdown en el navegador
   {
     'iamcco/markdown-preview.nvim',
