@@ -1,14 +1,12 @@
 require('craftzdog.base')
 require('craftzdog.highlights')
 require('craftzdog.maps')
-require('craftzdog.plugins')
+require('craftzdog.lazy')
 
 local has = vim.fn.has
 local is_mac = has "macunix"
 local is_win = has "win32"
 local is_wsl = has "wsl"
-
-
 
 if is_mac == 1 then
   require('craftzdog.macos')
