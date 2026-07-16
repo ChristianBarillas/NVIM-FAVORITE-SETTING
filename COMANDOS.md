@@ -374,8 +374,11 @@ prefijo es `Ctrl-b`: presiónalo, suéltalo, y luego la tecla del comando.
 |---|---|
 | `Ctrl-b c` | nueva ventana (pestaña) |
 | `Ctrl-b n` / `Ctrl-b p` / `Ctrl-b 1..9` | siguiente / anterior / ir a la N |
+| `Ctrl-b w` | lista visual de ventanas (navega con flechas) |
+| `Ctrl-b ,` | renombrar la ventana actual |
 | `Ctrl-b \|` / `Ctrl-b -` | dividir en panel vertical / horizontal |
 | `Ctrl-b h j k l` | moverse entre paneles (como en Neovim) |
+| `Ctrl-b z` | 🔍 zoom: el panel a pantalla completa (otra vez `z` lo restaura) |
 | `Ctrl-b x` | cerrar el panel |
 | `Ctrl-b [` | modo scroll/copiar (sal con `q`; copia estilo vim: `v` y `y`) |
 | `Ctrl-b r` | recargar la configuración |
