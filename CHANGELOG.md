@@ -5,6 +5,25 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.1.0] - 2026-07-16
+
+Stack completo para el trabajo real del usuario: Flutter, Python/Django,
+TypeScript/React, CSS/Tailwind.
+
+### Añadido
+- **Flutter/Dart**: `flutter-tools.nvim` (org nvim-flutter). Usa el LSP
+  del SDK (dartls), agrega `:FlutterRun`, `:FlutterDevices`,
+  `:FlutterReload`, `:FlutterRestart`, widget guides y closing tags.
+  Solo se activa si `flutter` es ejecutable (`cond`), así la config no
+  falla en máquinas sin el SDK. El SDK se instaló con
+  `brew install --cask flutter`.
+- **Python**: LSP `ruff` junto a pyright (pyright = tipos/navegación,
+  ruff = linting; el hover de ruff se desactiva para no duplicar).
+  Formateo al guardar con `ruff_organize_imports` + `ruff_format`
+  vía conform.
+- **Django**: formateo de plantillas `htmldjango` con `djlint`
+  (mason-tool-installer lo instala).
+
 ## [2.0.0] - 2026-07-16
 
 Modernización completa. La configuración de 2024 ya no funcionaba en Neovim

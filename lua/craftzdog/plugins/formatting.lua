@@ -17,6 +17,8 @@ return {
         markdown = { 'prettierd', 'prettier', stop_after_first = true },
         astro = { 'prettierd', 'prettier', stop_after_first = true },
         lua = { 'stylua' },
+        python = { 'ruff_organize_imports', 'ruff_format' },
+        htmldjango = { 'djlint' }, -- plantillas de Django
       },
       -- Formatear al guardar (como hacía null-ls)
       format_on_save = function(bufnr)

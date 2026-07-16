@@ -32,10 +32,16 @@ Mason v2, debugger integrado y un set completo de herramientas nivel senior.
 | UI de LSP | **lspsaga** — hover, rename, finder, code actions |
 
 ### Lenguajes configurados (Mason los instala solo)
-TypeScript/JavaScript (`vtsls`, con TypeScript incluido), HTML, CSS,
-**Tailwind CSS**, Astro, Emmet,
-Lua, **Python** (pyright), **PHP** (intelephense), JSON y YAML (con esquemas
-de schemastore), Bash, Docker, Markdown (marksman).
+TypeScript/JavaScript/**React** (`vtsls`, con TypeScript incluido), HTML,
+CSS, **Tailwind CSS**, Astro, Emmet, Lua, **Python/Django** (pyright para
+tipos + ruff para lint/formato), **PHP** (intelephense), JSON y YAML (con
+esquemas de schemastore), Bash, Docker, Markdown (marksman), y plantillas
+de Django con djlint.
+
+**Flutter/Dart**: soporte completo vía flutter-tools.nvim (usa el LSP del
+SDK). Se activa automáticamente si `flutter` está instalado
+(`brew install --cask flutter`): autocompletado, `:FlutterRun`,
+`:FlutterDevices`, hot reload, widget guides.
 
 ### Productividad senior
 | Plugin | Para qué |

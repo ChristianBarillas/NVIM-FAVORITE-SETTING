@@ -147,8 +147,19 @@ Aquí es donde Vim hace clic. Los comandos se **componen**:
 El autocompletado aparece solo: `Enter` acepta, `Ctrl-e` lo cierra,
 `Ctrl-d`/`Ctrl-f` desplazan la documentación.
 
-El código se **formatea solo al guardar** (prettier/stylua).
+El código se **formatea solo al guardar** (prettier para web, ruff para
+Python, djlint para plantillas Django, stylua para Lua).
 `:FormatDisable` lo apaga, `:FormatEnable` lo enciende.
+
+### Flutter (con el SDK instalado)
+
+| Comando | Acción |
+|---|---|
+| `:FlutterRun` | correr la app (hot reload automático al guardar) |
+| `:FlutterDevices` / `:FlutterEmulators` | elegir dispositivo / emulador |
+| `:FlutterReload` / `:FlutterRestart` | hot reload / hot restart manual |
+| `:FlutterQuit` | detener la app |
+| `:FlutterOutlineToggle` | árbol de widgets lateral |
 
 ### Ventanas y pestañas como senior
 

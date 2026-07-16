@@ -55,7 +55,8 @@ return {
           'cssls',
           'tailwindcss',
           'astro',
-          'pyright',
+          'pyright', -- Python: tipos y navegación
+          'ruff', -- Python: linting y formateo (lo usa conform)
           'intelephense',
           'jsonls',
           'yamlls',
@@ -70,13 +71,20 @@ return {
 
       -- Formateadores y linters
       require('mason-tool-installer').setup({
-        ensure_installed = { 'prettierd', 'eslint_d', 'stylua' },
+        ensure_installed = { 'prettierd', 'eslint_d', 'stylua', 'djlint' },
       })
 
       -- Keymaps cuando un LSP se conecta al buffer
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspAttach', { clear = true }),
         callback = function(ev)
+          -- En Python conviven pyright (tipos) y ruff (lint/format):
+          -- el hover lo da pyright para no duplicar ventanas
+          local client = vim.lsp.get_client_by_id(ev.data.client_id)
+          if client and client.name == 'ruff' then
+            client.server_capabilities.hoverProvider = false
+          end
+
           local opts = { buffer = ev.buf, silent = true }
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)

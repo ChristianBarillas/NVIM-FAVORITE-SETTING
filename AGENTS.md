@@ -83,6 +83,12 @@ colorizer/zen), `git.lua`, `terminal.lua` (toggleterm+lazygit),
   telescope-file-browser ya hace hijack de netrw.
 - DAP: adaptadores vía mason-nvim-dap (`handlers = {}` = setup automático);
   `python` (debugpy) y `js` (js-debug-adapter).
+- **Python = pyright + ruff juntos**: pyright para tipos/navegación, ruff
+  para lint y formateo (conform usa `ruff_organize_imports` +
+  `ruff_format`); el `hoverProvider` de ruff se desactiva en LspAttach.
+- **Flutter usa flutter-tools.nvim** (NO mason): el LSP dartls viene con
+  el SDK de Flutter. El spec tiene `cond = executable('flutter')` para no
+  fallar sin SDK. Django: plantillas `htmldjango` se formatean con djlint.
 
 ## Cómo verificar cambios (headless, sin abrir la UI)
 
