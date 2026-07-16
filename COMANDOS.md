@@ -3,6 +3,33 @@
 Objetivo: trabajar **100% con teclado**, sin tocar el mouse, y sentirte
 cómodo en Neovim como en un IDE profesional.
 
+## 🌅 La rutina diaria (el flujo completo, memorízate ESTO)
+
+```bash
+# 1. Abres Ghostty y entras (o vuelves) a tu burbuja del proyecto:
+tmux new -As proyecto        #  -As = entra si existe, créala si no
+
+# 2. Adentro, abres el editor:
+v .
+
+# 3. ¿Terminal? Sin salir de nada:
+#      Ctrl-\        rápida flotante (encima del código)
+#      Ctrl-b |      al lado del editor (misma carpeta)
+#      Ctrl-b c      pantalla aparte (misma carpeta) · Ctrl-b 1 vuelve
+
+# 4. ¿Claude Code? En otra ventana de tmux:
+#      Ctrl-b c  →  claude        (ya arranca en modo auto)
+
+# 5. Al terminar el día NO cierres nada:
+#      Ctrl-b d      → todo queda vivo (editor, servers, agentes)
+
+# 6. Mañana:
+tmux new -As proyecto        # y estás exactamente donde quedaste
+```
+
+> Regla de oro del orden: **primero tmux, adentro Neovim** — la capa de
+> afuera es la que mantiene viva a la de adentro.
+
 Convenciones de esta guía:
 
 - `\` es la **tecla líder** (backslash). `\ca` significa: presiona `\` y luego `c` y luego `a`.

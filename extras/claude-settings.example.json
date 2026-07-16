@@ -1,0 +1,13 @@
+{
+  "_comentario": "Ejemplo de configuración de Claude Code para ~/.claude/settings.json — copia las claves 'permissions' y 'autoMode' dentro de tu archivo. El modo auto solo funciona desde el settings de USUARIO (~/.claude/), nunca desde el de un proyecto.",
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "autoMode": {
+    "environment": [
+      "$defaults",
+      "Organization: Christian Barillas, desarrollador independiente. Primary use: software development (web con TypeScript/React/Tailwind, Python/Django, PHP, Flutter)",
+      "Source control: github.com/ChristianBarillas y todos los repositorios bajo esa cuenta"
+    ]
+  }
+}

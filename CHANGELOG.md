@@ -5,6 +5,24 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.6.0] - 2026-07-16
+
+Documentación del flujo de trabajo diario y del modo auto de Claude Code.
+
+### Añadido
+- **COMANDOS.md — "La rutina diaria"**: el flujo completo al inicio de
+  la guía (Ghostty → `tmux new -As` → `v .` → terminales sin salir →
+  Claude Code en su ventana → `Ctrl-b d` al terminar) con la regla de
+  oro del orden de capas.
+- **Claude Code en modo auto documentado**: sección nueva en INSTALL.md
+  y ejemplo versionado en `extras/claude-settings.example.json`
+  (`permissions.defaultMode: "auto"` + `autoMode.environment` con
+  `"$defaults"` y la cuenta de GitHub como infraestructura confiable).
+  Incluye cómo verificar (`claude auto-mode config`), el ciclo
+  `Shift+Tab` (manual → accept edits → plan → auto) y cómo revisar
+  bloqueos (`/permissions` → Recently denied → `r`). Nota: el modo auto
+  solo se lee del settings de USUARIO (`~/.claude/settings.json`).
+
 ## [2.5.3] - 2026-07-16
 
 ### Cambiado

@@ -160,6 +160,27 @@ así puedes usarlo en automatizaciones.
 "Velocidad de repetición de tecla" al máximo y baja "Retardo hasta la
 repetición" — en Vim la diferencia es enorme.
 
+## 🤖 Claude Code en modo auto (opcional, recomendado)
+
+El **modo auto** de Claude Code trabaja sin pedir permiso a cada paso:
+un clasificador aprueba lo rutinario y bloquea solo lo irreversible,
+destructivo o que apunte fuera de tu entorno.
+
+Agrega a **`~/.claude/settings.json`** (tiene que ser el de usuario —
+por seguridad, el modo auto se ignora en los settings de proyecto) las
+claves del ejemplo versionado en
+[`extras/claude-settings.example.json`](extras/claude-settings.example.json):
+
+- `permissions.defaultMode: "auto"` → toda sesión arranca en auto
+- `autoMode.environment` → con `"$defaults"` + tu cuenta de GitHub como
+  infraestructura de confianza (los push a tus repos fluyen sin bloqueos)
+
+Verifica con `claude auto-mode config` (imprime la config efectiva).
+Dentro de una sesión, `Shift+Tab` cicla los modos:
+`manual → accept edits → plan → auto`. Si el clasificador bloquea algo
+tuyo repetidamente: `/permissions` → pestaña "Recently denied" → `r`
+para reintentar, y agrega esa infraestructura a `autoMode.environment`.
+
 ---
 
 ## 🔍 Cómo comprobar que todo quedó bien
