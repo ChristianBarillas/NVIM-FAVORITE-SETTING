@@ -5,6 +5,12 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.5.3] - 2026-07-16
+
+### Cambiado
+- tmux: `prefijo+c` (ventana nueva) ahora hereda la carpeta del panel
+  actual, igual que los splits `|` y `-`.
+
 ## [2.5.2] - 2026-07-16
 
 ### Cambiado
