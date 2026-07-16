@@ -38,13 +38,15 @@ return {
     opts = {},
   },
 
-  -- Vista previa de Markdown en el navegador
+  -- Vista previa de Markdown en el navegador (100% tipo página web)
+  -- build por npm: el binario precompilado no sirve en Apple Silicon
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     ft = { 'markdown' },
-    build = function()
-      vim.fn['mkdp#util#install']()
-    end,
+    build = 'cd app && npm install',
+    keys = {
+      { ';m', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Markdown en el navegador' },
+    },
   },
 }

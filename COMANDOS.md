@@ -220,6 +220,7 @@ Python, djlint para plantillas Django, stylua para Lua).
 |---|---|
 | `\o` | outline: panel lateral con los símbolos del archivo |
 | `;b` | navegar los breadcrumbs (ruta de símbolos de arriba) |
+| `;m` | 🌐 markdown renderizado en el navegador (otra vez `;m` lo cierra) |
 | `za` | abrir/cerrar el pliegue bajo el cursor |
 | `zR` / `zM` | abrir / cerrar todos los pliegues |
 | `zp` | ver el contenido de un pliegue sin abrirlo |

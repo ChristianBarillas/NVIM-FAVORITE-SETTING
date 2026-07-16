@@ -5,6 +5,18 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.6.2] - 2026-07-16
+
+### Corregido
+- **markdown-preview funcionaba a medias en Apple Silicon**: el binario
+  precompilado que descarga su build no sirve en arm64 (quedaba vacío).
+  Ahora el build es `cd app && npm install` (modo Node, nativo) — y se
+  aplicó en esta máquina.
+
+### Añadido
+- Atajo `;m`: abre/cierra la vista de markdown **100% tipo página web**
+  en el navegador (`:MarkdownPreviewToggle`), con scroll sincronizado.
+
 ## [2.6.1] - 2026-07-16
 
 ### Añadido
