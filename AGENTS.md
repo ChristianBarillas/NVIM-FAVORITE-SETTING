@@ -62,7 +62,13 @@ colorizer/zen), `git.lua`, `terminal.lua` (toggleterm+lazygit),
    reintroducir dependencias muertas.
 8. Herramientas de sistema: instalar por **Homebrew** siempre que exista
    formula (preferencia explícita del usuario).
-9. **Íconos Nerd Font SIEMPRE con escape explícito `'\u{XXXX}'`** en los
+9. **`install.sh` es el bootstrap oficial** (documentado en INSTALL.md):
+   si agregas/quitas servidores LSP, herramientas de Mason, parsers de
+   treesitter o herramientas de brew, actualiza TAMBIÉN la lista
+   correspondiente en install.sh y el inventario de INSTALL.md. Fuentes
+   de verdad: `lsp.lua` (ensure_installed + tool-installer), `dap.lua`
+   (adaptadores), `treesitter.lua` (parsers).
+10. **Íconos Nerd Font SIEMPRE con escape explícito `'\u{XXXX}'`** en los
    strings de Lua (LuaJIT lo soporta), nunca pegando el glifo crudo: los
    glifos PUA se corrompen fácilmente al pasar por editores/pipelines
    (ya ocurrió: quedaron espacios en blanco). Usar solo codepoints

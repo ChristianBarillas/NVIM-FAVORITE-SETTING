@@ -5,6 +5,35 @@ Todos los cambios notables de esta configuración se documentan aquí.
 El formato sigue [Keep a Changelog](https://keepachangelog.com/es/1.1.0/)
 y las versiones siguen [Semantic Versioning](https://semver.org/lang/es/).
 
+## [2.4.0] - 2026-07-16
+
+Migración a máquina nueva con un solo comando, sin omisiones.
+
+### Añadido
+- **INSTALL.md**: guía definitiva de instalación con el inventario
+  COMPLETO del entorno (herramientas de brew con su propósito, casks,
+  los 21 paquetes de Mason, los 26 parsers, archivos de configuración
+  que se tocan, tiempos estimados, los 4 pasos manuales, verificación,
+  solución de problemas y desinstalación/rollback).
+- Regla en AGENTS.md: mantener install.sh e INSTALL.md en sincronía con
+  lsp.lua/dap.lua/treesitter.lua al cambiar paquetes.
+
+### Cambiado
+- **install.sh reescrito de cero** (probado end-to-end, terminó
+  "sin fallas"):
+  - Instala/verifica Command Line Tools de Xcode (espera el diálogo).
+  - Homebrew con `shellenv` permanente en `~/.zprofile` (Apple
+    Silicon e Intel).
+  - Todas las herramientas y casks, incluido el **SDK de Flutter**
+    (omitible con `SIN_FLUTTER=1`).
+  - Respaldo automático de cualquier `~/.config/nvim` previo y symlink
+    al repo desde donde esté clonado.
+  - Instala los **21 paquetes de Mason por eventos y verifica cada uno
+    en disco** (aprendido del bug de instalaciones fantasma de 2.0.0).
+  - Verificación final ✓/✗ de comandos, arranque, parsers y Mason;
+    el código de salida es el número de fallas (0 = perfecto).
+  - Idempotente: re-ejecutable sin efectos secundarios.
+
 ## [2.3.1] - 2026-07-16
 
 ### Corregido
